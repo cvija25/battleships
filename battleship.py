@@ -82,11 +82,12 @@ def play():
 
     winner = False
     while not winner:
-        guess_row = int(input("Guess row:"))
-        clinet_socket.send(bytes(guess_row))
-        guess_col = int(input("Guess col:"))
-        clinet_socket.send(bytes(guess_col))
-        winner = clinet_socket.recv()
+        guess_row = input("Guess row:")
+        clinet_socket.send(guess_row.encode('utf-8'))
+        guess_col = input("Guess col:")
+        clinet_socket.send(guess_col.encode('utf-8'))
+        # winner = clinet_socket.recv(1024).decode('utf-8')
+        # print(winner)
 
     if winner:
         print("Congratulations you win the game")

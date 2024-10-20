@@ -90,12 +90,12 @@ client_socket, addr = server_socket.accept()
 
 while not winner:
     board.print()
-    guess_row = server_socket.recv(1024)
+    guess_row = int(client_socket.recv(1024).decode('utf-8'))
     print(guess_row)
-    guess_col = server_socket.recv(1024)
+    guess_col = int(client_socket.recv(1024).decode('utf-8'))
     print(guess_col)
     if not board.check_valid_guess(guess_row,guess_col):
-        server_socket.send("Bad guess, try again!")
+        client_socket.send("Bad guess, try again!")
         continue
     board.update(guess_row,guess_col)
     if board.check_win():
