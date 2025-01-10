@@ -67,32 +67,3 @@ Hit!
 ...
 You lose the game!   <--- message in the end of the game
 """
-import socket
-import dotenv
-import os
-
-dotenv.load_dotenv()
-
-def play():
-    clinet_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    host = 'localhost'
-    port = int(os.environ.get("PORT"))
-    clinet_socket.connect((host, port))
-
-    winner = False
-    while not winner:
-        guess_row = input("Guess row:")
-        clinet_socket.send(guess_row.encode('utf-8'))
-        guess_col = input("Guess col:")
-        clinet_socket.send(guess_col.encode('utf-8'))
-        # winner = clinet_socket.recv(1024).decode('utf-8')
-        # print(winner)
-
-    if winner:
-        print("Congratulations you win the game")
-    else:
-        print("You lose the game")
-
-if __name__ == '__main__':
-    play()
