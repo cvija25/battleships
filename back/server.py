@@ -82,17 +82,45 @@
 # winner = False
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from threading import Thread
+import json
 
 app = FastAPI()
 
 @app.websocket('/ws')
 async def websocket_endpoint(websocket : WebSocket):
+    
     await websocket.accept()
+    boats = {"x":2, "y":3, "z":4}
+    board = [
+              ["x","x","y","o"],
+              ["o","o","y","o"],
+              ["o","o","y","o"],
+              ["z","z","z","z"]
+            ]
+    points = 0
     try:
-        while True:
+        while points < 2:
             data = await websocket.receive_json()
             print(f"Received: {data}")
-            await websocket.send_json(data)
+            guessed_boat = board[data["x"]][data["y"]]
+            boats[guessed_boat] -= 1
+            if boats[guessed_boat] == 0:
+                points += 1
+        print("winnnn")
 
     except WebSocketDisconnect:
         print("Client disconnected")
+
+
+"""
+Player:
+    boats -> {"x":2, "y":3, "z":4}
+    board -> [
+              [x],[x],[y],[o],
+              [o],[o],[y],[o],
+              [o],[o],[y],[o]
+              [z],[z],[z],[z]
+            ]
+
+"""

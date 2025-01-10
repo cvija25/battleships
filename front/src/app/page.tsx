@@ -1,6 +1,7 @@
 // pages/index.tsx
 import Head from "next/head";
-import Grid from "../components/Grid";
+import OpponentGrid from "../components/OpponentGrid";
+import PlayerGrid from "../components/PlayerGrid"
 
 const Home: React.FC = () => {
   return (
@@ -12,8 +13,9 @@ const Home: React.FC = () => {
       </Head>
 
       <main className="p-4">
-        <h1 className="text-2xl font-bold mb-6">Grid with Clickable Cells</h1>
-        <Grid rows={5} columns={5} />
+        <h1 className="text-2xl font-bold mb-6">Battleships online</h1>
+        <OpponentGrid rows={5} columns={5} />
+        <PlayerGrid rows={5} columns={5} />
       </main>
     </div>
   );
