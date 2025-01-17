@@ -11,9 +11,10 @@ interface Cell {
 }
 
 const PlayerGrid: React.FC<GridProps> = ({ rows, columns }) => {
+  const array = Array.from({ length: rows });
   return (
     <div className="flex flex-col space-y-2">
-        {Array.from({ length: rows }).map((_, rowIndex) => (
+        {array.map((_, rowIndex) => (
             <div key={rowIndex} className="flex space-x-2">
             {Array.from({ length: columns }).map((_, colIndex) => (
                 <div

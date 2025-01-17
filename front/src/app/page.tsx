@@ -13,9 +13,7 @@ const Home: React.FC = () => {
       </Head>
 
       <main className="p-4">
-        <h1 className="text-2xl font-bold mb-6">Battleships online</h1>
-        <OpponentGrid rows={5} columns={5} />
-        <PlayerGrid rows={5} columns={5} />
+        <h1 className="text-2xl font-bold mb-6">Wellcome to Battleships online!!</h1>
       </main>
     </div>
   );

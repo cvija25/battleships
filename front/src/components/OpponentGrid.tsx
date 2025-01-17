@@ -15,6 +15,7 @@ interface Cell {
 const OpponentGrid: React.FC<GridProps> = ({ rows, columns }) => {
   const [clickedCells, setClickedCells] = useState<Cell[]>([]);
   const [socket, setSocket] = useState<WebSocket|null>(null);
+  const array = Array.from({length:rows});
 
   const handleCellClick = (row: number, col: number) => {
     const newClickedCells = [...clickedCells, { row, col }];
@@ -42,12 +43,11 @@ const OpponentGrid: React.FC<GridProps> = ({ rows, columns }) => {
 
   return (
     <div className="flex flex-col space-y-2">
-        {Array.from({ length: rows }).map((_, rowIndex) => (
+        {array.map((_,rowIndex) => (
             <div key={rowIndex} className="flex space-x-2">
-            {Array.from({ length: columns }).map((_, colIndex) => (
-                <div
-                  key={colIndex}
-                  className={`w-16 h-16 border border-gray-300 flex items-center justify-center text-sm cursor-pointer ${
+            {array.map((_,colIndex) => (
+                <div key={colIndex}
+                    className={`w-16 h-16 border border-gray-300 flex items-center justify-center text-sm cursor-pointer ${
                       clickedCells.some(
                       (cell) => cell.row === rowIndex && cell.col === colIndex
                       )
